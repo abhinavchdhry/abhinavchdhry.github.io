@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Blog by abhinavchdhry</title>
+
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <header>
+        <h1>Blog</h1>
+        <p></p>
+        
+          <p class="view"><a href="https://github.com/abhinavchdhry/Blog">View the Project on GitHub <small></small></a></p>
+        
+			<! Categories>
+			<p>Clustering</p>
+			<p>Optimization</p>
+			<p>Classification</p>
+        
+		<output id="categories"></output>
+		<script>
+			var fs = require('fs');
+			var files = fs.readdirSync('/assets/photos/');
+			var output = []
+			for (var i = 0, f; f = files[i]; i++) {
+				output.push('<p>', '<a href=', 'content/', f, '/index.html>', f, '</a></p>')
+			}
+			document.getElementById('categories').innerHTML = output.join('')
+		</script>
+
+        
+      </header>
+  <body>
+    <div class="wrapper">
+      
+      <section>
+
+      <h1 id="a-practical-guide-to-unsupervised-learning">A practical guide to unsupervised learning</h1>
+<p><a href="#lets-talk-clustering">Clustering</a></p>
+<ul>
+  <li><a href="#the-why">Part 1 - The Why</a></li>
+  <li><a href="#the-what">Part 2 - The What</a></li>
+  <li><a href="#the-how">Part 3 - The How</a></li>
+</ul>
+
+<p><a href="#gradient-descent">Gradient Descent</a></p>
+
+<p><a href="#about">About</a></p>
+
+<h2 id="lets-talk-clustering-">Let’s talk clustering <a name="lets-talk-clustering"></a></h2>
+
+<h3 id="part-1---the-why-">Part 1 - The Why <a name="the-why"></a></h3>
+<p>You just woke up from a 15 year coma and rediscover the internet. You open <a href="news.google.com">Google News</a> to find out what has happened since and notice a column of “Top Stories” on the left. When you click on a top story topic that says “Donald Trump” and you are shown a collection of multiple news stories from different sources <i>all somehow related to this person you have no idea about</i>. As you explore the Top Stories and the various categories to your left, you realize that Google has somehow managed to go through many (if not all) news articles on the internet and grouped them based on topics. Interesting.</p>
+
+<p><img src="images/GoogleNews.JPG" alt="alt text" /></p>
+
+<p>Case 2:</p>
+
+<p>All of these tasks that would seem to take days for any human to accomplish is relatively trivial for machines given a suite of algorithms called clustering algorithms. As the name suggests, the fundamental</p>
+
+<h3 id="part-2---the-what-">Part 2 - The What <a name="the-what"></a></h3>
+
+<h3 id="part-3---the-how-">Part 3 - The How <a name="the-how"></a></h3>
+
+<h2 id="k-nearest-neighbor">K-Nearest Neighbor</h2>
+
+<p><br />
+<br /></p>
+
+<h1 id="understanding-gradient-descent-">Understanding Gradient Descent <a name="gradient-descent"></a></h1>
+
+<p><strong>The Problem statement</strong>: Given a function <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20f%3A%20%5Cmathbf%7BX%7D%20%5Crightarrow%20R" alt="equation" /> where <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathbf%7BX%7D%20%3D%20%28x_1%2C%20x_2%2C%20...%2C%20x_n%29" alt="equation" /> is a n-dimensional vector, find a minima <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathbf%7BX%5E*%7D" alt="equation" /> (a point for which <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20f%28%5Cmathbf%7BX%5E*%7D%29" alt="equation" /> is a minimum)</p>
+
+<p><strong>2 dimensional case</strong>
+For the sake of simplicity and notation, we will first consider the case when the vector <b>X</b> is in 2-dimensional space i.e. <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Ctextbf%7BX%7D%20%3D%20%28x_1%2C%20x_2%29" alt="equation" />. The graph for this function might look something like this (this one happens to be a plot of  <img src="http://latex.codecogs.com/gif.latex?%5Cdpi%7B150%7D%20z%20%3D%20%5Csin%28x%29+%5Csin%28y%29" alt="equation" />:</p>
+
+<p><img src="images/3d-plot-sinx2-siny2.JPG" alt="alt-text" /></p>
+
+<p>Imagine now that this graph represents the some part of surface of the earth and you happen to be standing at some point in it. Your goal is head to the deepest point possible (in other words, head to the point with the lowest elevation).</p>
+
+<p>The first thing you’re probably going to think of (without even being aware of it) is this: which direction do I take the next step? Of course you won’t take a step uphill from that point. Simple logic tells us to head downwards along the direction of steepest decline (assuming of course that you don’t slip and fall). This is the exact thinking behind the gradient descent algorithm: <strong>find the direction of maximum increasing (positive) gradient at the current point and take a small step in the opposite direction</strong>.</p>
+
+<p>Now, by the rules of calculus, a small change in the function <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5CDelta%20f" alt="equation" /> value due to a small change in the vector <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5CDelta%20%5Cmathbf%7BX%7D%20%3D%20%28%5CDelta%20x_1%2C%20%5CDelta%20x_2%29" alt="equation" /> is given by:</p>
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p><img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5CLARGE%20%5CDelta%20f%20%3D%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_1%7D.%5CDelta%20x_1%20+%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_2%7D.%5CDelta%20x_2" alt="equation" /></p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>or, in vector notation</p>
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p><img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5CLARGE%20%5CDelta%20f%20%3D%20%5Cnabla%20%5Cmathbf%7Bf%7D%5Ccdot%20%5CDelta%20%5Cmathbf%7BX%7D" alt="equation" />,          where <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5Cnabla%20%5Cmathbf%7Bf%7D%20%3D%20%28%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_1%7D%2C%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_2%7D%29" alt="equation" /> and <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5CDelta%20%5Cmathbf%7BX%7D%20%3D%20%28%5CDelta%20x_1%2C%20%5CDelta%20x_2%29" alt="equation" /></p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>Here <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B150%7D%20%5Cfrac%7B%5Cdelta%20f%7D%7B%5Cdelta%20x_1%7D%20%5C%20and%5C%20%5Cfrac%7B%5Cdelta%20f%7D%7B%5Cdelta%20x_2%7D" alt="equation" /> represent the partial derivatives of the function <b>f</b> w.r.t. the variables x1 and x2 respectively</p>
+
+<p>Our goal now is to choose the delta vector <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5CDelta%20%5Cmathbf%7BX%7D%20%3D%20%28%5CDelta%20x_1%2C%20%5CDelta%20x_2%29" alt="equation" /> so as to make sure that:</p>
+<ul>
+  <li>The value <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5CDelta%20f" alt="equation" /> is negative (so that we know we are moving in the direction of decreasing gradient, or downwards)</li>
+  <li>The magnitude of <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5CDelta%20f" alt="equation" /> is maximum along this direction</li>
+</ul>
+
+<p>If we choose <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5CDelta%20f" alt="equation" /> as follows:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p><img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%7B%5Ccolor%7BRed%7D%20%5CDelta%20%5Cmathbf%7BX%7D%20%3D%20-%5Ceta.%5Cnabla%20%5Cmathbf%7Bf%7D%7D" alt="equation" />.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>then <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Clarge%20%5CDelta%20f%20%3D%20%5Cnabla%20%5Cmathbf%7Bf%7D%20%5Ccdot%20%28-%5Ceta.%5Cnabla%20%5Cmathbf%7Bf%7D%29%20%3D%20-%5Ceta%20%28%5Cnabla%20%5Cmathbf%7Bf%7D%20%5Ccdot%5Cnabla%20%5Cmathbf%7Bf%7D%29%20%3D%20-%5Ceta.%28pos%20%5C%20value%29%20%3D%20neg%20%5C%20value" alt="equation" /></p>
+
+<p><strong>The delta vector is now parallel to the gradient vector at that point</strong> which according to the Cauchy-Schwartz inequality maximizes the magnitude of the dot product of the 2 vectors (hence maximizing <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%7C%5CDelta%20f%7C" alt="equation" />). Note that the positive constant <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Ceta" alt="equation" /> does not change the direction of the vector, only scales its value. Since we are only looking to find the direction of maximization of descent, scaling the vector does not affect our goal.</p>
+
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5Ceta" alt="equation" /> is also called the <strong>learning rate</strong>, a value that determines how large or small a step we take while descending. <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5Ceta" alt="equation" /> should be small so as not to introduce error (if the step is too large, we might miss the minima). Also it should not be too small that the descent takes a long time.</p>
+
+<p>And so we arrive at the update function for the variable vector <strong>X</strong></p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p><img src="http://latex.codecogs.com/gif.latex?%5Cdpi%7B150%7D%20%7B%5Ccolor%7BRed%7D%20%5Cmathbf%7BX_%7Bnew%7D%7D%20%3D%20%5Cmathbf%7BX_%7Bold%7D%7D%20-%20%5Ceta.%5Cmathbf%7B%5Cnabla%20f%20%7D%7D" alt="equation" /></p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>Although we have described the problem for the special case of 2 dimensions, it easily extends to the more general case of N dimensions. The formula above remains the same.</p>
+
+<h4 id="iterations-and-when-to-stop-todo">Iterations and when to stop (TODO)</h4>
+
+<h4 id="drawbacks">Drawbacks</h4>
+<p>Note that, in general, a function can have multiple local minima and a global minima. Based on how the gradient descent algorithm is initialized (the initial value that we choose for the variable vector) and the structure of the function itself, we may end up at any one of these local minima. So <strong>gradient descent does not always produce the global minima</strong>.</p>
+
+<h3 id="proof-todo">Proof (TODO)</h3>
+<p>According to the <a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Cauchy-Schwartz inequality</a>, for any 2 vectors <b>u</b> and <b>v</b> of the same size,
+<img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5Cleft%20%7C%20%5Cmathbf%7Bu%7D%5Ccdot%5Cmathbf%7Bv%7D%20%5Cright%20%7C%20%5Cleq%20%5Cleft%20%7C%20%5Cmathbf%7Bu%7D%20%5Cright%20%7C.%20%5Cleft%20%7C%20%5Cmathbf%7Bv%7D%20%5Cright%20%7C" alt="equation" /> <strong>and the equality happens when u and v are equal.</strong></p>
+
+<p>__Why we need to maximize the value of delta f __</p>
+
+<p>If we restrict our change vector delX (or the incremental step) to be small, as restricted by <img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%5Cleft%20%7C%20%5CDelta%20%5Cmathbf%7BX%7D%20%5Cright%20%7C%20%5Cleq%20%5Cepsilon%20%2C%5C%20for%20%5C%20some%20%5C%20small%20%5C%20%5Cepsilon%20%3E%200" alt="equation" /> then according to the Cauchy-Schwartz inequality, the magnitude of change is</p>
+
+<p><img src="http://latex.codecogs.com/gif.latex?%5Cinline%20%5Clarge%20%7C%5CDelta%20f%7C%20%3D%20%7C%5Cnabla%20%5Cmathbf%7Bf%7D%5Ccdot%20%5CDelta%20%5Cmathbf%7BX%7D%7C%20%5Cleq%20%7C%5Cnabla%20%5Cmathbf%7Bf%7D%7C%5Ccdot%20%7C%5CDelta%20%5Cmathbf%7BX%7D%7C%20%5Cleq%20%7C%5Cnabla%20%5Cmathbf%7Bf%7D%7C.%5Cepsilon" alt="equation" /></p>
+
+<p>So the maximum value of the magnitude of change</p>
+
+<h2 id="about-">About <a name="about"></a></h2>
+
+
+      </section>
+      
+    </div>
+    <script src="/Blog/assets/js/scale.fix.js"></script>
+
+
+  
+  </body>
+  
+  <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/abhinavchdhry">abhinavchdhry</a></p>
+        
+      </footer>
+</html>
