@@ -1,33 +1,28 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Blog by abhinavchdhry</title>
+---
+layout: default
+---
+{% assign posts_count = (paginator.posts | size) %}
 
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <header>
-        <h1>Blog</h1>
-        <p></p>
+<div class="home">
+  {% if posts_count > 0 %}
+    <div class="posts">
+      {% for post in paginator.posts %}
+        <div class="post py3">
+          <p class="post-meta">{{ post.date | date: site.date_format }}</p>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+          <span class="post-summary">
+            {% if post.summary %}
+              {{ post.summary }}
+            {% else %}
+              {{ post.excerpt }}
+            {% endif %}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
 
-          <p class="view"><a href="https://github.com/abhinavchdhry/Blog">View the Project on GitHub <small></small></a></p>
-
-                        <! Categories>
-                        <p><a href="content/Clustering/index.html">Clustering</a></p>
-                        <p><a href="content/Optimization/index.html">Optimization</a></p>
-                        <p><a href="content/Classification/index.html">Classification</a></p>
-			<p><a href="content/DeepLearning/index.html">Deep Learning</a></p>
-
-      </header>
- 
-   <footer>
-        
-        <p>This project is maintained by <a href="https://github.com/abhinavchdhry">abhinavchdhry</a></p>
-        
-      </footer>
-</html>
+    {% include pagination.html %}
+  {% else %}
+    <h1 class='center'>{{ site.text.index.coming_soon }}</h1>
+  {% endif %}
+</div>
