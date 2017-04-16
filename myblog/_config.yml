@@ -2,8 +2,8 @@
 title:       Page 42
 email:       achoudh3@ncsu.edu
 author:      Abhinav Choudhury
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
-baseurl:     ""
+description: "Machine learning"
+baseurl:     
 url:         ""
 date_format: "%b %-d, %Y"
 
@@ -51,7 +51,7 @@ twitter_username:
 skype_username:
 steam_nickname:
 google_plus_id:
-linkedin_username:
+linkedin_username: abhinavchdhry
 angellist_username:
 medium_id:
 bitcoin_url:

@@ -5,13 +5,20 @@
 
 .site-header a {
   color: #333;
-  font-size: $h3;
+  font-size: $h2;
   font-weight: 300;
   background-image: none;
 }
 
 .site-header .site-title {
-  font-size: $h2;
+  font-size: $h1;
+}
+
+.site-description {
+  float: left;
+  padding-top: 0.5em;
+  font-size: 14pt;
+  margin-top: 0.5em;
 }
 
 .site-nav {

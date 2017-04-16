@@ -22,14 +22,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="post p2 p-responsive wrap" role="main">
       <div class="measure">
-	<div class="custom">
-		<h1><center>This is it.</center></h1>
-	</div>
-
-	{% for p in site.posts %}
-		<a href={{p.url}}><center>{{p.title}}</center></a>
-		<br>
-	{% endfor %}
+	{{ content }}
       </div>
     </div>
   </div>
