@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Page 42</title>
+    <description>A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Understanding Gradient Descent</title>
+        <description>&lt;h3 id=&quot;the-problem-statement&quot;&gt;The Problem statement&lt;/h3&gt;
+&lt;p&gt;Given a function &lt;script type=&quot;math/tex&quot;&gt;f : X \rightarrow R&lt;/script&gt; where &lt;script type=&quot;math/tex&quot;&gt;X = (x_1, x_2, ... x_n)&lt;/script&gt; is a n-dimensional vector, find a minima &lt;script type=&quot;math/tex&quot;&gt;X^*&lt;/script&gt; equation (a point for which &lt;script type=&quot;math/tex&quot;&gt;f(X^*)&lt;/script&gt; is a minimum)&lt;/p&gt;
+
+&lt;h3 id=&quot;2-dimensional-case&quot;&gt;2 dimensional case&lt;/h3&gt;
+&lt;p&gt;For the sake of simplicity and notation, we will first consider the case when the vector X is in 2-dimensional space i.e. &lt;script type=&quot;math/tex&quot;&gt;X = (x_1, x_2)&lt;/script&gt;. The graph for this function might look something like this (this one happens to be a plot of &lt;script type=&quot;math/tex&quot;&gt;z = sin(x) + sin(y)&lt;/script&gt;)&lt;/p&gt;
+
+&lt;p&gt;[Image]&lt;/p&gt;
+
+&lt;p&gt;Imagine now that this graph represents the some part of surface of the earth and you happen to be standing at some point in it. Your goal is head to the deepest point possible (in other words, head to the point with the lowest elevation).&lt;/p&gt;
+
+&lt;p&gt;The first thing you’re probably going to think of (without even being aware of it) is this: which direction do I take the next step? Of course you won’t take a step uphill from that point. Simple logic tells us to head downwards along the direction of steepest decline (assuming of course that you don’t slip and fall). This is the exact thinking behind the gradient descent algorithm: &lt;strong&gt;find the direction of maximum increasing (positive) gradient at the current point and take a small step in the opposite direction.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, by the rules of calculus, a small change in the function &lt;script type=&quot;math/tex&quot;&gt;\Delta f&lt;/script&gt; due to a small change in the vector &lt;script type=&quot;math/tex&quot;&gt;\Delta X = (\Delta x_1, \Delta x_2)&lt;/script&gt; is given by:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Delta f = \frac{\partial f}{\partial x_1}.\Delta x_1 + \frac{\partial f}{\partial x_2}.\Delta x_2&lt;/script&gt;
+
+&lt;p&gt;or, in vector notation&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Delta f = \nabla f . \Delta X,  
+	where \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2})&lt;/script&gt;
+
+&lt;p&gt;Our goal now is to choose the delta vector &lt;script type=&quot;math/tex&quot;&gt;\Delta X = (\Delta x_1, \Delta x_2)&lt;/script&gt; so as to make sure that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The value &lt;script type=&quot;math/tex&quot;&gt;\Delta f&lt;/script&gt; is negative (so that we know we are moving in the direction of decreasing gradient, or downwards)&lt;/li&gt;
+  &lt;li&gt;The magnitude of &lt;script type=&quot;math/tex&quot;&gt;\Delta f&lt;/script&gt; is maximum along this direction&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If we choose &lt;script type=&quot;math/tex&quot;&gt;\Delta f&lt;/script&gt; as follows: &lt;script type=&quot;math/tex&quot;&gt;\Delta X = -\eta.\nabla f&lt;/script&gt;, then&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Delta f = \mathbf{\nabla f}.(-\eta \mathbf{\nabla f}) = -\eta.(\mathbf{\nabla f.\nabla f}) = -\eta.(positive value) = negative&lt;/script&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;strong&gt;The delta vector is now parallel to the gradient vector at that point&lt;/strong&gt; which according to the Cauchy-Schwartz inequality maximizes the magnitude of the dot product of the 2 vectors (hence maximizing &lt;script type=&quot;math/tex&quot;&gt;\left \| \Delta f \right \|&lt;/script&gt; ). Note that the positive constant &lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt;  does not change the direction of the vector, only scales its value. Since we are only looking to find the direction of maximization of descent, scaling the vector does not affect our goal.&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt; is also called the &lt;strong&gt;learning rate&lt;/strong&gt;, a value that determines how large or small a step we take while descending. &lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt; should be small so as not to introduce error (if the step is too large, we might miss the minima). Also it should not be too small that the descent takes a long time.&lt;/p&gt;
+
+&lt;p&gt;And so we arrive at the update function for the variable vector X:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathbf{X_{new}} = \mathbf{X_{old}} - \eta.\mathbf{\nabla f}&lt;/script&gt;
+
+&lt;p&gt;Although we have described the problem for the special case of 2 dimensions, it easily extends to the more general case of N dimensions. The formula above remains the same.
+&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;iterations-and-when-to-stop-todo&quot;&gt;Iterations and when to stop (TODO)&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;drawbacks&quot;&gt;Drawbacks&lt;/h3&gt;
+&lt;p&gt;Note that, in general, a function can have multiple local minima and a global minima. Based on how the gradient descent algorithm is initialized (the initial value that we choose for the variable vector) and the structure of the function itself, we may end up at any one of these local minima. &lt;strong&gt;So gradient descent does not always result in the global minima&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;proof-todo&quot;&gt;Proof (TODO)&lt;/h3&gt;
+&lt;p&gt;According to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality&quot;&gt;Cauchy-Schwartz inequality&lt;/a&gt; for any 2 vectors &lt;script type=&quot;math/tex&quot;&gt;\mathbf{u}&lt;/script&gt; and&lt;script type=&quot;math/tex&quot;&gt;\mathbf{v}&lt;/script&gt; of the same size, &lt;script type=&quot;math/tex&quot;&gt;\| \mathbf{u}.\mathbf{v} \| \le \| \mathbf{u} \| . \| \mathbf{v} \|&lt;/script&gt; and the equality happens when u and v are equal.&lt;/p&gt;
+
+&lt;p&gt;If we restrict our change vector &lt;script type=&quot;math/tex&quot;&gt;\Delta X&lt;/script&gt; (or the incremental step) to be small, as restricted by &lt;script type=&quot;math/tex&quot;&gt;\| \Delta X \| \le \epsilon&lt;/script&gt;for some small &lt;script type=&quot;math/tex&quot;&gt;\epsilon &gt; 0&lt;/script&gt; then according to the Cauchy-Schwartz inequality, the magnitude of change is&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;| \Delta f | = | \mathbf{\nabla f }. \mathbf{\Delta X} |  \le | \mathbf{\nabla f} |.| \mathbf{\Delta X}| \le |\mathbf{\nabla f}|.\epsilon&lt;/script&gt;
+
+</description>
+        <pubDate>Sat, 15 Apr 2017 20:20:57 -0400</pubDate>
+        <link>http://localhost:4000/jekyll/update/2017/04/15/gradient-descent/</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2017/04/15/gradient-descent/</guid>
+      </item>
+    
+      <item>
+        <title>Fish classification using Keras</title>
+        <description>&lt;p&gt;Keras is a powerful framework for building deep learning models that facilitates rapid prototyping. It works on top of a tensor manipulation engine (either Tensorflow or Theano) which are optimized to leverage the GPU for fast, parallel matrix computations.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-organization-and-preprocessing&quot;&gt;Data organization and preprocessing&lt;/h3&gt;
+&lt;p&gt;For an image classification task, you are likely to find your image dataset in a number of different formats:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;A folder containing all the training images and a separate text file designating the class ids for each image&lt;/li&gt;
+  &lt;li&gt;Images named by concatenating their respective classes with an unique identifier eg. dog_001.jpg, cat_002.jpg, etc&lt;/li&gt;
+  &lt;li&gt;Separate directories for each class containing images of that class&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The image preprocessing library in Keras expects data to be in the third format. These inbuilt image reading and batching functionalities in Keras makes life a lot easier by allowing you to&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-training-and-validation-sets&quot;&gt;Creating training and validation sets&lt;/h3&gt;
+&lt;p&gt;We need to split the data into a training set which will be used to train our deep learning model, and a validation set which would allow us to test how well our model classifies instances it has not seen before. This is a measure of the &lt;strong&gt;generalization capability&lt;/strong&gt; of the model, and is crucial in reducing overfitting. The ratio of the split is usually set at 70:30 or 80:20.&lt;/p&gt;
+
+&lt;p&gt;The idea is to use a statistical sampling technique called the &lt;strong&gt;Stratified Split&lt;/strong&gt;. If the dataset is split randomly and there are only a few of images for certain classes, it is likely that either the training set or the validation set will end up with no instances of those classes. When the model observes no instances of a certain class in its training data, its classification performance on instances of that class will likely be poor. Stratified split solves this problem by sampling instances from each class based on the set split ratio, thus ensuring both the training and validation sets have instances of every class.&lt;/p&gt;
+
+&lt;p&gt;Below is a function that uses Scikit-learn’s &lt;a href=&quot;http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html&quot;&gt;StratifiedShuffleSplit&lt;/a&gt; function to create a 80:20 split&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.model_selection&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StratifiedShuffleSplit&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stratifiedSplit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StratifiedShuffleSplit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_splits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2017&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_n_splits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Next, we use the function to create training and validation datasets:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;n&quot;&gt;ORIGINAL_DATAPATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./train/&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TRAIN_PATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./TRAIN/&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;VALIDATION_PATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./VALID/&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrainAndValidationDatasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datapath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;### Sampling training and validation datasets...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ALB&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;BET&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;DOL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;LAG&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;NoF&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;OTHER&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;SHARK&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;YFT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeDirectoryStructure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                                &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;makedirs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;shutil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rmtree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                                &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;makedirs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;img_names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;img_classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;class_dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ORIGINAL_DATAPATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;filepaths&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;glob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class_dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;*.jpg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filepaths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;img_names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filepath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;img_classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;train_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;valid_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stratifiedSplit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img_names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;makeDirectoryStructure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRAIN_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;makeDirectoryStructure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VALIDATION_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;shutil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyfile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ORIGINAL_DATAPATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;\
+                	&lt;span class=&quot;n&quot;&gt;TRAIN_PATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;valid_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_classes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;shutil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyfile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ORIGINAL_DATAPATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+               		&lt;span class=&quot;n&quot;&gt;VALIDATION_PATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;createTrainAndValidationDatasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ORIGINAL_DATAPATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 15 Apr 2017 20:20:57 -0400</pubDate>
+        <link>http://localhost:4000/jekyll/update/2017/04/15/fish-classification-keras/</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2017/04/15/fish-classification-keras/</guid>
+      </item>
+    
+  </channel>
+</rss>
