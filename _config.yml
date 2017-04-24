@@ -4,7 +4,7 @@ email:       achoudh3@ncsu.edu
 author:      Abhinav Choudhury
 description: "Machine learning"
 baseurl:     
-url:         ""
+url:         "abhinavchdhry.github.io"
 date_format: "%b %-d, %Y"
 
 # Google services
@@ -40,7 +40,7 @@ disqus_shortname:
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
 facebook_comments: true
-facebook_appid: 423473031368522
+facebook_appid: 423472211368604
 facebook_comments_number: 10
 
 # Social icons
