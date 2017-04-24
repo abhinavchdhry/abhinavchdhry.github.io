@@ -1,9 +1,13 @@
 ---
 layout: post
-title:  "Understanding Gradient Descent"
+title:  "Understanding Gradient Descent: Part I"
 date:   2017-04-15 20:20:57 -0400
 categories: jekyll update
 ---
+
+Gradient descent is a powerful mathematical optimization technique on which many machine learning algorithms are built. This is the first part of an article aimed at understanding gradient descent from a mathematical and computational standpoint.
+
+In this article, we look at the mathematical problem that gradient descent solves and how. It assumes that the reader is familiar with basic calculus and vector algebra. The next part deals with the computational aspects of gradient descent and its applications in machine learning.
 
 ### The Problem statement
 Given a function $$ f : X \rightarrow R $$ where $$ X = (x_1, x_2, ... x_n) $$ is a n-dimensional vector, find a minima $$X^*$$ equation (a point for which $$ f(X^*) $$ is a minimum)
@@ -11,7 +15,7 @@ Given a function $$ f : X \rightarrow R $$ where $$ X = (x_1, x_2, ... x_n) $$ i
 ### 2 dimensional case
 For the sake of simplicity and notation, we will first consider the case when the vector X is in 2-dimensional space i.e. $$ X = (x_1, x_2) $$. The graph for this function might look something like this (this one happens to be a plot of $$ z = sin(x) + sin(y) $$)
 
-[Image]
+![Image](/images/3d-plot-sinx2-siny2.jpeg)
 
 Imagine now that this graph represents the some part of surface of the earth and you happen to be standing at some point in it. Your goal is head to the deepest point possible (in other words, head to the point with the lowest elevation).
 
