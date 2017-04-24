@@ -4,7 +4,7 @@ email:       achoudh3@ncsu.edu
 author:      Abhinav Choudhury
 description: "Machine learning"
 baseurl:     
-url:         "abhinavchdhry.github.io"
+url:         "https://abhinavchdhry.github.io"
 date_format: "%b %-d, %Y"
 
 # Google services
