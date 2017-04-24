@@ -26,10 +26,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<h1><center>This is it.</center></h1>
 	</div>
 
+	<div class="front-page-content">
 	{% for p in site.posts %}
+		<div class="front-page-post-link">
 		<a href={{p.url}}><center>{{p.title}}</center></a>
+		<center style='font-size:0.9em;'><i>{{p.tagline}}</i></center>
 		<br>
+		</div>
 	{% endfor %}
+	</div>
       </div>
     </div>
   </div>

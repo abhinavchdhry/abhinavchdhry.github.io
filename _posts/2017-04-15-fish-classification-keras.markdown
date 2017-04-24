@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Fish classification using Keras"
+tagline: "Practical intro to deep learning using Keras"
 date:   2017-04-15 20:20:57 -0400
 categories: jekyll update
 ---

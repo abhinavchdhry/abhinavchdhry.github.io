@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Understanding Gradient Descent: Part II"
+tagline: "From math to applications and code"
 date:   2017-04-15 20:20:57 -0400
 categories: jekyll update
 ---
