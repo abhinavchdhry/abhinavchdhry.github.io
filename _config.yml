@@ -1,11 +1,12 @@
 # Site settings
-title:       Page 42
+title:       Numb3rs
 email:       achoudh3@ncsu.edu
 author:      Abhinav Choudhury
 description: "Machine learning"
 baseurl:     
 url:         "https://abhinavchdhry.github.io"
 date_format: "%b %-d, %Y"
+headline: Contents
 
 # Google services
 google_verification:
