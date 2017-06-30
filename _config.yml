@@ -16,7 +16,7 @@ google_analytics:
 google_tag_manager:
 # Bing services
 bing_verification:
-
+future: true
 # Optional features
 animated:             false
 show_related_posts:   false
