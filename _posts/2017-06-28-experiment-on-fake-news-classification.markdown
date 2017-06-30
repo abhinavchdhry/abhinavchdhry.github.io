@@ -10,16 +10,16 @@ Fake news articles disseminated via social media like Facebook and Twitter has b
 
 ### Types of Fake News
 Not all new misleading news articles are created with the same purpose. The following are the major categories 
-* Fake news or hoax: Websites that post articles with the purpose of intentionally deceiving readers, possibly mimicking existing real news websites. e.g. RealNewsRightNow.com, ABCnews.com.co
-* Satire/parody: Websites intended to be funny with no direct intention of deceiving readers but may still lead to spread of misinformation. e.g. TheOnion.com, 
-* Bias/conspiracy theories: Websites consisting of a mix of biased opinions and made up conspiracy theories.
+* <b>Fake news or hoax</b>: Websites that post articles with the purpose of intentionally deceiving readers, possibly mimicking existing real news websites. e.g. RealNewsRightNow.com, ABCnews.com.co
+* <b>Satire/parody</b>: Websites intended to be funny with no direct intention of deceiving readers but may still lead to spread of misinformation. e.g. TheOnion.com, 
+* <b>Bias/conspiracy theories</b>: Websites consisting of a mix of biased opinions and made up conspiracy theories.
  
 We speculate that the content in these websites differ distinctively from genuine news sources in their style of writing and choice of words. We believe that a machine learning model should be able to accurately model this difference based solely on the text of the articles. For the purpose of this paper, we have classified news articles belonging to any of the 3 categories above as “Fake” since our primary goal is only to red-flag an article if it is not deemed genuine and truthful.
 
 ### The Data
-In order to assess the performance/reliability of a machine learning system in identifying fake news, hoaxes and satire from genuine news articles, a robust dataset of news articles is a prerequisite and building this dataset is no trivial task. We expect that the data to satisfy the following requirements:
-Topic diversity: Having news articles from a plethora of categories such as politics, business, sports, entertainment, etc increases the generalization capability of our trained model. We try to maintain a balanced topic distribution as far as possible but this is not easy due to the political bias of most fake news sites.
-Source diversity: Different news websites and sources have different styles of writing, preference of word usage, etc. To factor in such differences in our model, articles need to be scraped from a variety of different sources.
+In order to assess the performance/reliability of an intelligent learning system in identifying fake news, hoaxes and satire from genuine news articles, a robust dataset of news articles is needed and building this dataset is no trivial task. We expect that the data to satisfy the following requirements:
+* <b>Topic diversity</b>: Having news articles from a plethora of categories such as politics, business, sports, entertainment, etc increases the generalization capability of our trained model. We try to maintain a balanced topic distribution as far as possible but this is not easy due to the political bias of most fake news websites.
+* <b>Source diversity</b>: Different news websites and sources have different styles of writing, preference of word usage, etc. To factor in such differences in our model, articles need to be scraped from a variety of different sources.
 Good class distribution: The class distribution should ideally be balanced, i.e. roughly equal number of instances for Fake and Real classes. 
  
 For articles categorized as fake news, hoaxes and satire, the data was gathered by scraping the following websites:
@@ -30,25 +30,25 @@ For articles categorized as fake news, hoaxes and satire, the data was gathered 
 * [Civic Tribune](http://www.civictribune.com) (Fake/Hoax/Bias)
 * [NewsBiscuit](http://www.newsbiscuit.com) (Fake/Hoax/Bias)
 
-A total of 3313 articles were gathered from these websites which have been assigned the class “Fake” regardless of the category being satire, fake, hoax or bias. Note that since most of these websites focus largely on political content, the topic of the articles collected might be biased towards the politics category.
- 
-In addition, an openly available fake news dataset on Kaggle[2] was used, which had 12403 articles in English belonging to the time period October 2016 and November 2016, and categorized as being fake, unreliable, untrustworthy or junk. We added these articles to our dataset, coalescing them under the “Fake” class. This resulted in a total of 15716 fake news articles.
- 
-For authentic news, we used a collection of articles from The New York times and The Guardian since these are the popular and reliable news sources, and also have active developer APIs for mining news articles. A publicly available dataset of news articles from BBC news[3] was also appended to the list of real articles, adding up to a total of 12591 real news articles.
+I scraped a total of 3313 articles from these websites and assigned them the class “Fake” regardless of the article being a satire, fake news, hoax or bias. Since most of these websites focus largely on political content, the topic of the articles collected might be biased towards the politics category. In addition, I used an openly available fake news dataset on Kaggle[2], which had 12403 English articles published between October 2016 and November 2016, and categorized as being fake, unreliable, untrustworthy or junk. I added these articles to the dataset, coalescing them under the “Fake” class. This resulted in a total of <b>15716 fake news articles</b>.
+
+Since these fake news websites do not have developer APIs, I scraped the website using simple pattern matching. Most of these websites have the article text embedded within paragraph tags in the HTML body. Using the [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) HTML parser in Python made this easy, and I have made all the code available at the [Github repository](https://github.com/abhinavchdhry/Fake-News-Corpus).
+
+For authentic news, I used a collection of articles from The New York times and The Guardian since these are popular and reliable news sources, and also have active developer APIs for mining news articles. A publicly available dataset of news articles from BBC news[3] was also appended to the list of real articles, adding up to a total of <b>12591 real news articles</b>.
 
 ## Vector space models for text
 The next phase involves converting the text articles to a numerical fixed-length vector representation interpretable by machine learning models. The following techniques are frequently used for vector space models:
 
 ### Bag-of-words (BoW)
-The bag-of-words model is a simple and intuitive model, but works surprisingly well for methods involving calculation of a similarity measure between documents. It is commonly used in document clustering tasks. The idea behind the model is to generate a vocabulary based on the unique words collected from documents (or articles) in the corpus, and then projecting each article/document into a vectorized representation by counting the occurrence of each word of the vocabulary in the document/article. Either the entire vocabulary or a subset of most commonly occurring words can be used.
+The bag-of-words model is a simple and intuitive text vectorization model, but works surprisingly well for methods that involve calculation of a similarity measure between documents. It is commonly used in document clustering tasks. The idea behind the model is to generate a vocabulary based on the unique words collected from documents (or articles) in the corpus, and then projecting each article/document into a fixed-length vector representation by counting the occurrence of each word of the vocabulary in the document/article. Either the entire vocabulary or a subset of representative words can be used. The image below illustrates how the 2 sentences are converted to their vector representations using the BoW model.
 
 ![Bag-of-words model illustrated](/images/bow_illustration.png)
 
-A major flaw of the bag-of-words model is that it does not account for the ordering of words in a document, and as such any random permutation of words of a document would end up having the same representation. For example, the following sentences, although different semantically, would have the same representation under the BoW model:
+A disadvantage of the bag-of-words model is that it does not account for the ordering of words in a sentence/document, which we believe holds a lot of semantic information. As such any permutation of words of the same document would end up having the same representation. For example, the following sentences, although different semantically, would have the same representation under the BoW model:
 	The quick brown fox jumps over the lazy dog
 	The quick dog jumps over the lazy brown fox
  
-Another issue with the BoW model is its inability to put adequate weights on important, representative words in the corpus vs frequently occurring words in the language like prepositions and pronouns. For example, using the BoW model, words like “the”, “a”, “an” which occur very frequently in English text would always end up with high counts.
+Another issue with the BoW model is its inability to put adequate weights on important, representative words in the corpus vs frequently occurring words in the language like prepositions and pronouns. For instance, words like “the”, “a”, “an” which occur very frequently in English text would always end up with high counts under the BoW model.
 
 ### Term-frequency Inverse document frequency (tfidf)
 tfidf combines the frequency of occurrence of each term with the inverse of its document frequency (the number of documents in the corpus it shows up in). This dampens the high frequency scores of words that appear frequently in all documents such as pronouns and prepositions (“this”, “an”, “but”, etc)
@@ -118,10 +118,10 @@ Unsurprisingly, for the parameter combinations we experimented with, the TFIDF f
 Classifiers based on the features extracted using latent semantic indexing perform marginally better (best accuracy 97.44%) than those based on TFIDF features. This is expected as LSI uses larger TFIDF representations and thus has more information content. However, the extra computational effort and time of performing LSA over using base TFIDF features may not be worth the effort.
 
 ## References
-1. Clark, Stephen. 2013b. Vector space models of lexical meaning. In S. Lappin and C. Fox, eds., Handbook of Contemporary Semantics, 2nd ed.. Malden, MA: Blackwell. In press; https://www.cl.cam.ac.uk/~sc609/pubs/sem_handbook.pdf
-2. Kaggle fake news dataset, https://www.kaggle.com/mrisdal/fake-news
-3. BBC News datasets, http://mlg.ucd.ie/datasets/bbc.html
+1. Clark, Stephen. 2013b. [Vector space models of lexical meaning.](https://www.cl.cam.ac.uk/~sc609/pubs/sem_handbook.pdf) In S. Lappin and C. Fox, eds., Handbook of Contemporary Semantics, 2nd ed.. Malden, MA: Blackwell. In press;
+2. [Kaggle fake news dataset](https://www.kaggle.com/mrisdal/fake-news)
+3. [BBC News datasets](http://mlg.ucd.ie/datasets/bbc.html)
 4. Eugenio Tacchini, Gabriele Ballarin, Marco L. Della Vedova, Stefano Moret, Luca de Alfaro, Some Like it Hoax: Automated Fake News Detection in Social Networks
 5. Victoria L. Rubin, Niall J. Conroy, Yimin Chen, and Sarah Cornwell, Fake News or Truth? Using Satirical Cues to Detect Potentially Misleading News
 6. Conroy, Rubin and Chen, Automatic Deception Detection: Methods for Finding Fake News
-7. LightGBM: A fast, distributed, high performance gradient boosting (GBDT, GBRT, GBM or MART) framework, https://github.com/Microsoft/LightGBM
+7. [LightGBM](https://github.com/Microsoft/LightGBM): A fast, distributed, high performance gradient boosting (GBDT, GBRT, GBM or MART) framework
